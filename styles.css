@@ -1,0 +1,317 @@
+  /* 整體風格設定 */
+        :root {
+            --danger-red: #e63946;
+            --navy-blue: #071164;
+            --light-blue: #a8dadc;
+            --chat-bg: #f1faee;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Microsoft JhengHei', sans-serif;
+            margin: 0;
+            background-color: #f7f9fc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* 介面容器 */
+        .app-container {
+            width: 100%;
+            max-width: 500px;
+            height: 90vh;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        #home-page {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    /* 確保所有內容在手機畫面中垂直水平都置中 */
+    justify-content: center; 
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    /* 這裡維持你漂亮的漸層色 */
+    background: linear-gradient(135deg, #090366 0%, #17003b 100%);
+    color: white;
+    transition: 0.5s;
+    min-height: 100%; /* 確保填滿容器 */
+}
+
+/* 這是新加入的：專門控制去背圖片的樣式 */
+.hero-img {
+    width: 70%;             /* 寬度佔螢幕的 70% */
+    max-width: 300px;       /* 最大不超過 300px，避免太大 */
+    margin: 10px 0 25px 0;  /* 上方留點空隙，下方離按鈕遠一點 */
+    
+    /* 讓去背圖產生漂亮的發光或陰影效果 */
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+    
+    /* 增加一個微弱的浮動動畫（選配） */
+    animation: floating 3s ease-in-out infinite;
+}
+
+/* 浮動動畫效果：讓圖片輕微上下移動，更有質感 */
+@keyframes floating {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+        #home-page h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        #home-page p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .main-btn {
+            background-color: var(--danger-red);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: 0.3s;
+            margin-bottom: 15px;
+        }
+
+        .main-btn:hover {
+            transform: scale(1.05);
+            background-color: #ff4d5a;
+        }
+
+        .link-165 {
+            color: white;
+            text-decoration: underline;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        /* 第二階段：判斷頁面（對話視窗） */
+        #checker-page {
+            display: none; /* 預設隱藏 */
+            flex-direction: column;
+            height: 100%;
+        }
+
+                /* --- 分析頁面的 Header 修正 --- */
+        .header {
+            background: #071164;
+            color: white;
+            padding: 12px 15px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* 確保這層在 checker-page 內也能正確排版 */
+        }
+
+        .back-btn {
+            cursor: pointer;
+            font-size: 0.8rem;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        /* 對話內容區 */
+        .chat-box {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: var(--chat-bg);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .bubble {
+            max-width: 85%;
+            padding: 12px 15px;
+            border-radius: 15px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .bot { background: white; align-self: flex-start; border-bottom-left-radius: 2px; box-shadow: 2px 2px 5px rgba(0,0,0,0.05); }
+        .user { background: #dcf8c6; align-self: flex-end; border-bottom-right-radius: 2px; }
+        .alert { background: #ffccd5; color: #b91c1c; align-self: center; text-align: center; width: 90%; font-weight: bold; border: 1px dashed #b91c1c; }
+
+        /* 輸入與快捷鍵區 */
+        .input-area {
+            background: rgb(255, 255, 255);
+            padding: 5px;
+            border-top: 1px solid #00000002;
+        }
+
+        .quick-tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .tag {
+            background: #e9ecef;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            cursor: pointer;
+            border: 1px solid #dee2e6;
+        }
+
+        .tag:hover { background: #dee2e6; }
+
+        .input-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+        }
+
+        .send-btn {
+            background: var(--navy-blue);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        /* --- 頂部導覽列更新 --- */
+    .top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: #090366; /* 給它顏色，避免透明重疊 */
+    color: white;
+    /* 關鍵：改為 relative，這樣它會佔據空間，不會壓到下方的內容 */
+    position: relative; 
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 100;
+    }
+
+    .nav-logo {
+        color: white;
+        font-weight: bold;
+        font-size: 1.2rem;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    /* --- 漢堡圖示 --- */
+    .hamburger-icon {
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .hamburger-icon span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: white;
+        border-radius: 2px;
+        transition: 0.3s;
+    }
+/* --- 修正後的側邊選單 (確保從左邊滑入) --- */
+   .side-menu {
+    position: fixed;
+    top: 0;
+    left: -280px;      /* 初始藏在左側 */
+    width: 260px;
+    height: 100%;
+    z-index: 1000;
+    background: #1a0042;
+    transition: 0.4s ease;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+    padding-top: 50px; /* 避開頂部關閉按鈕 */
+}
+
+    /* 當選單打開時：必須改為 left: 0 */
+    .side-menu.active {
+        left: 0; 
+}
+
+    /* 選單內的連結 */
+    .side-nav-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .side-nav-links li {
+        padding: 15px 25px;
+        text-decoration: none;
+        font-size: 1.1rem;
+        color: #ccc;
+        display: block;
+        transition: 0.3s;
+        cursor: pointer;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .side-nav-links li:hover {
+        color: white;
+        background: rgba(255,255,255,0.1);
+        padding-left: 35px; /* hover 時稍微右移的效果 */
+    }
+
+    /* 關閉按鈕 (X) */
+    .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 25px;
+        font-size: 36px;
+        color: #888;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .close-btn:hover {
+        color: white;
+    }
+
+/* 遮罩背景 */
+.menu-overlay {
+    position: fixed;    /* 關鍵：覆蓋全螢幕 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 900;       /* 介於選單與主畫面之間 */
+    display: none;
+}
+
+    /* 當選單打開時顯示遮罩 */
+    .menu-overlay.active {
+        display: block;
+    }
