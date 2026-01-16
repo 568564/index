@@ -1,0 +1,287 @@
+/* --- 1. 整體風格與變數設定 --- */
+:root {
+    --danger-red: #e63946;
+    --navy-blue: #071164;
+    --light-blue: #a8dadc;
+    --chat-bg: #f1faee;
+}
+
+* {
+    box-sizing: border-box; /* 確保 padding 不會撐破容器 */
+}
+
+body {
+    font-family: 'Segoe UI', 'Microsoft JhengHei', sans-serif;
+    margin: 0;
+    background-color: #f7f9fc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* --- 2. 介面容器：手機滿版與 PC 容器切換 --- */
+.app-container {
+    width: 100vw;       /* 手機預設：寬度佔滿視窗 */
+    height: 100dvh;     /* 手機預設：使用 dvh 自動扣除工具列高度 */
+    max-width: none;
+    background: white;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 當螢幕寬度大於 768px (PC或平板)，顯示為手機容器感 */
+@media (min-width: 768px) {
+    .app-container {
+        width: 375px;   
+        height: 812px;
+        margin: auto;
+        border-radius: 30px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    }
+}
+
+/* --- 3. 頂部導覽列 --- */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: #090366; 
+    color: white;
+    position: relative; 
+    width: 100%;
+    z-index: 100;
+}
+
+.nav-logo {
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.hamburger-icon {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.hamburger-icon span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+/* --- 4. 第一階段：首頁畫面 --- */
+#home-page {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #e7e6ec 0%, #bda2e7 100%);
+    color: white;
+    transition: 0.5s;
+    min-height: 100%;
+}
+
+#home-page h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+#home-page p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 30px;
+}
+
+.hero-img {
+    width: 70%;
+    max-width: 300px;
+    margin: 10px 0 25px 0;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+    animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+.main-btn {
+    background-color: var(--danger-red);
+    color: white;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: 0.3s;
+    margin-bottom: 15px;
+}
+
+.main-btn:hover {
+    transform: scale(1.05);
+    background-color: #ff4d5a;
+}
+
+.link-165 {
+    color: white;
+    text-decoration: underline;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+/* --- 5. 第二階段：對話分析頁面 --- */
+#checker-page {
+    display: none; 
+    flex-direction: column;
+    height: 100%;
+}
+
+.header {
+    background: #071164;
+    color: white;
+    padding: 12px 15px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.back-btn {
+    cursor: pointer;
+    font-size: 0.8rem;
+    background: rgba(255,255,255,0.2);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.chat-box {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: var(--chat-bg);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.bubble {
+    max-width: 85%;
+    padding: 12px 15px;
+    border-radius: 15px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.bot { background: white; align-self: flex-start; border-bottom-left-radius: 2px; box-shadow: 2px 2px 5px rgba(0,0,0,0.05); }
+.user { background: #dcf8c6; align-self: flex-end; border-bottom-right-radius: 2px; }
+.alert { background: #ffccd5; color: #b91c1c; align-self: center; text-align: center; width: 90%; font-weight: bold; border: 1px dashed #b91c1c; }
+
+.input-area {
+    background: white;
+    padding: 10px;
+    border-top: 1px solid #eee;
+}
+
+.input-row {
+    display: flex;
+    gap: 10px;
+}
+
+input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    outline: none;
+}
+
+.send-btn {
+    background: var(--navy-blue);
+    color: white;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- 6. 側邊選單與遮罩邏輯 --- */
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -280px; 
+    width: 260px;
+    height: 100%;
+    z-index: 1000;
+    background: #1a0042;
+    transition: 0.4s ease;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+    padding-top: 50px;
+}
+
+.side-menu.active {
+    left: 0; 
+}
+
+.side-nav-links {
+    list-style: none;
+    padding: 0;
+}
+
+.side-nav-links li {
+    padding: 15px 25px;
+    color: #ccc;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    transition: 0.3s;
+}
+
+.side-nav-links li:hover {
+    color: white;
+    background: rgba(255,255,255,0.1);
+    padding-left: 35px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 36px;
+    color: #888;
+    cursor: pointer;
+}
+
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 900;
+    display: none;
+}
+
+.menu-overlay.active {
+    display: block;
+}
